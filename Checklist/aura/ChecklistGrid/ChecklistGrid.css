@@ -1,0 +1,47 @@
+.THIS * {
+    box-sizing: border-box;
+
+}
+
+/* Create two equal columns that floats next to each other */
+.THIS .column {
+    float: left;
+    width: 30%;
+    padding: 80px;
+    max-height: 150px;
+    min-height: 150px;
+    position: relative;
+    margin:4px;
+}
+
+/* Clear floats after the columns */
+.THIS .row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.THIS .title {
+    text-align: center; 
+    position:absolute;
+    width: 100%; 
+    height: 50px; 
+    left: 0; top: 10px;
+}
+
+.THIS .status {
+    text-align: center; 
+    position:absolute;
+    width: 100%; 
+    height: 20px; 
+    left: 0; top: 60px;
+    font-size: 15px;
+}
+
+.THIS .completed {
+    text-align: center; 
+    position:absolute;
+    width: 100%; 
+    height: 20px; 
+    left: 0; top: 90px;
+}

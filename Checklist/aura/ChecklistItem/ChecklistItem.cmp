@@ -1,0 +1,72 @@
+<aura:component controller="ChecklistController">
+    <aura:attribute name="checklistItemId" type="Id"/>
+    <aura:attribute name="checklistItem" type="ChecklistItem__c"/>
+    <aura:attribute name="modalIsOpen" type="Boolean" default="false"/>
+
+	   
+    <div>
+        <div style="display:inline-block;width:96%;">
+        	<h1 class="slds-text-heading_medium slds-m-bottom_xx-small">{!v.checklistItem.Description__c}</h1><br/>
+    	</div>
+        <div style="display:inline-block;float:right;">
+            <button class="slds-button slds-button_icon" title="Edit Checklist" onclick="{!c.editChecklistItem}">
+                <lightning:icon class="icn" iconName="utility:edit" size="small" alternativeText="Edit Checklist"/>
+            </button>
+        </div>
+    </div>
+
+    <div style="display:inline-block;">
+    	<div style="font-size: 15px;">
+        	<div style="font-size: initial;" class="slds-text-body_regular"><strong>Status:</strong> &nbsp; {!v.checklistItem.Status__c}</div>
+    	</div>
+        <div style="display:inline-table;font-size: 15px;">
+            <aura:if isTrue="{!v.checklistItem.Completation_Status__c}">
+                <div style="font-size: initial;" class="slds-text-body_regular"><strong>Completed at:</strong> &nbsp; 
+                    <lightning:formattedDateTime value="{!v.checklistItem.Completed_At__c}" year="numeric" month="short" day="numeric" hour12="true"/></div>
+            </aura:if>
+        </div>
+    </div>
+    <div style="width:30%;text-align:center;display:inline-block;float:right;">
+        <lightning:input type="toggle"
+                         label="Completation Status"
+                         name="status"
+                         class="slds-p-around--small"
+                         checked="{!v.checklistItem.Completation_Status__c}"
+                         messageToggleActive="Completed"
+                         messageToggleInactive="Incomplete"
+                         onchange="{!c.changeStatus}"
+                         />
+    </div>
+    
+    <aura:if isTrue="{!v.modalIsOpen}">
+            <div>
+                <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                    <div class="slds-modal__container">
+                        <header class="slds-modal__header">
+                            <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Edit ChecklistItem</h2>
+                        </header>
+                        <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                            <lightning:recordEditForm aura:id="checklistItemEditForm"
+                                 objectApiName="ChecklistItem__c" 
+                                 recordId="{!v.checklistItemId}"
+                                 onsubmit="{!c.createNewRecord}"
+                                 onsuccess="{!c.successNewRecord}">
+                                <lightning:messages />
+                                <lightning:inputField fieldName="Description__c" />
+                                <lightning:inputField fieldName="Status__c" />
+                                <aura:if isTrue="{!v.checklistItem.Completation_Status__c}">
+                                	<lightning:inputField fieldName="Completed_At__c"/>
+                                </aura:if>
+                                    
+                                <div style="text-align: center;" class="slds-m-top_medium">
+                                    <lightning:button variant="brand" type="cancel" name="cancel" label="Cancel" onclick="{!c.cancel}"/>
+                                    <lightning:button variant="brand" type="submit" name="save" label="Save" />
+                                </div>
+                            </lightning:recordEditForm>                        
+                        </div>
+                    </div>
+                </section>
+            	<div class="slds-backdrop slds-backdrop_open"></div>
+    		</div>
+        </aura:if>
+</aura:component>

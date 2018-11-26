@@ -1,0 +1,14 @@
+.THIS .heading h1{
+    font-size:200%;
+}
+
+.THIS .icn svg{
+    fill : black;
+    width : 20px;
+    height: 20px;
+}
+
+.THIS .inputH {
+    width: 300px;
+	display:none;    
+}
