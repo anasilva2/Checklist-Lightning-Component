@@ -2,4 +2,4 @@
 Lightning Component created for a Community in Salesforce
 
 
-![Checklist Lightning Component](https://imgur.com/Ff8d68q)
+![Checklist Lightning Component](communitySnapshot.png)
